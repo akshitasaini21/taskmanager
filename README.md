@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 TaskFlow — Team Task Manager
 
 A full-stack Team Task Manager with role-based access control (Admin/Member), built with Node.js, Express, SQLite, and vanilla JS.
@@ -163,3 +164,6 @@ For persistent data, add a Railway Volume:
 6. Move tasks through Kanban (To Do → In Progress → Done)
 7. Show overdue detection on dashboard
 8. Admin → Team page → change role
+=======
+# taskmanager
+>>>>>>> d48b70e2e9b9e931816754c7ab808e5b12969232

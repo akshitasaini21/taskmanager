@@ -197,7 +197,7 @@ async function renderDashboard() {
   `;
 
   // My tasks
-  const myTasks = await api.get(`/tasks?assignee_id=${state.user.id}`);
+  const myTasks = await api.get(`/tasks?assignee_id=${state.user._id || state.user.id}`);
   const myList = document.getElementById('my-tasks-list');
   if (myTasks.length === 0) {
     myList.innerHTML = '<div class="empty-state">No tasks assigned to you</div>';
@@ -268,7 +268,10 @@ function renderProjects() {
   }).join('');
 
   const newBtn = document.getElementById('new-project-btn');
-  if (newBtn) newBtn.onclick = () => showNewProjectModal();
+  if (newBtn) {
+    newBtn.onclick = () => showNewProjectModal();
+    if (state.user.role === 'admin') newBtn.classList.remove('hidden');
+  }
 }
 
 function viewProject(id) {
@@ -416,7 +419,7 @@ function openTaskDetail(id) {
     `<option value="${u.id}" ${t.assignee_id === u.id ? 'selected' : ''}>${escHtml(u.name)}</option>`
   ).join('');
 
-  const canEdit = state.user.role === 'admin' || t.created_by === state.user.id;
+  const canEdit = state.user.role === 'admin' || t.created_by === state.user._id || state.user.id;
   
   openModal(`Task: ${t.title}`, `
     <div class="form-group"><label>Title</label><input id="m-task-title" type="text" value="${escHtml(t.title)}" ${canEdit ? '' : 'disabled'}/></div>
@@ -510,7 +513,7 @@ async function renderTeam() {
         </div>
         <div style="margin-left:auto"><span class="badge badge-${u.role}">${u.role}</span></div>
       </div>
-      ${u.id !== state.user.id ? `
+      ${u.id !== state.user._id || state.user.id ? `
       <div class="team-card-actions">
         <button class="btn btn-ghost btn-sm" onclick="toggleRole(${u.id}, '${u.role}')">
           ${u.role === 'admin' ? 'Set Member' : 'Set Admin'}

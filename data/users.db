@@ -1,0 +1,3 @@
+{"name":"Akshita Saini","email":"akshitasaini052@gmail.com","password":"$2a$10$2T/0e6rvN0Cm7qLrGJe49eiHiPz0A1NXp6lWCcE0ZfRzvMcq51G/O","role":"admin","createdAt":"2026-05-01T07:17:17.550Z","_id":"wfybNBfv4O2XTsVp"}
+{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"$$indexCreated":{"fieldName":"email","unique":true}}

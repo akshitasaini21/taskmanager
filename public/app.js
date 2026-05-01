@@ -158,25 +158,15 @@ async function initApp() {
 
 function navigateTo(page) {
   state.currentPage = page;
-  document.querySelectorAll('.page').forEach(p => {
-    p.classList.remove('active');
-    p.classList.add('hidden');
-  });
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.classList.remove('hidden'); });
   document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  const activePage = document.getElementById(`page-${page}`);
-  activePage.classList.remove('hidden');
-  activePage.classList.add('active');
+  document.getElementById(`page-${page}`).classList.add('active');
   document.querySelector(`[data-page="${page}"]`)?.classList.add('active');
 
-if (page === 'dashboard') renderDashboard();
+  if (page === 'dashboard') renderDashboard();
   if (page === 'projects') renderProjects();
   if (page === 'tasks') renderTasksPage();
   if (page === 'team') renderTeam();
-
-  // Fix admin buttons
-  if (state.user && state.user.role === 'admin') {
-    document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
-  
 }
 
 // ── Data Loaders ──────────────────────────────────────
@@ -499,7 +489,7 @@ function showNewTaskModal() {
       await api.post('/tasks', {
         title,
         description: document.getElementById('m-task-desc').value,
-        project_id: document.getElementById('m-task-project').value,
+        project_id: parseInt(document.getElementById('m-task-project').value),
         priority: document.getElementById('m-task-priority').value,
         due_date: document.getElementById('m-task-due').value || null,
         assignee_id: document.getElementById('m-task-assignee').value || null,

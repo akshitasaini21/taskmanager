@@ -494,7 +494,7 @@ function showNewTaskModal() {
       await api.post('/tasks', {
         title,
         description: document.getElementById('m-task-desc').value,
-        project_id: parseInt(document.getElementById('m-task-project').value),
+        project_id: document.getElementById('m-task-project').value,
         priority: document.getElementById('m-task-priority').value,
         due_date: document.getElementById('m-task-due').value || null,
         assignee_id: document.getElementById('m-task-assignee').value || null,

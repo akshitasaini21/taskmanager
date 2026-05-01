@@ -462,7 +462,7 @@ async function deleteTask(id) {
 }
 
 function showNewTaskModal() {
-  const projOptions = state.projects.map(p => `<option value="${p.id}">${escHtml(p.name)}</option>`).join('');
+  const projOptions = state.projects.map(p => `<option value="${String(p.id).replace(/'/g, '')}">`
   const userOptions = state.users.map(u => `<option value="${u.id}">${escHtml(u.name)}</option>`).join('');
   
   if (!state.projects.length) return toast('Create a project first', 'error');
@@ -489,7 +489,7 @@ function showNewTaskModal() {
       await api.post('/tasks', {
         title,
         description: document.getElementById('m-task-desc').value,
-        project_id: parseInt(document.getElementById('m-task-project').value),
+        project_id: document.getElementById('m-task-project').value.replace(/'/g, ''),
         priority: document.getElementById('m-task-priority').value,
         due_date: document.getElementById('m-task-due').value || null,
         assignee_id: document.getElementById('m-task-assignee').value || null,

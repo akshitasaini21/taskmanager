@@ -158,9 +158,14 @@ async function initApp() {
 
 function navigateTo(page) {
   state.currentPage = page;
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.classList.add('hidden');
+  });
   document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  document.getElementById(`page-${page}`).classList.add('active');
+  const activePage = document.getElementById(`page-${page}`);
+  activePage.classList.remove('hidden');
+  activePage.classList.add('active');
   document.querySelector(`[data-page="${page}"]`)?.classList.add('active');
 
   if (page === 'dashboard') renderDashboard();

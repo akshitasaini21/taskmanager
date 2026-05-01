@@ -168,10 +168,15 @@ function navigateTo(page) {
   activePage.classList.add('active');
   document.querySelector(`[data-page="${page}"]`)?.classList.add('active');
 
-  if (page === 'dashboard') renderDashboard();
+if (page === 'dashboard') renderDashboard();
   if (page === 'projects') renderProjects();
   if (page === 'tasks') renderTasksPage();
   if (page === 'team') renderTeam();
+
+  // Fix admin buttons
+  if (state.user && state.user.role === 'admin') {
+    document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+  
 }
 
 // ── Data Loaders ──────────────────────────────────────
